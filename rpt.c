@@ -6,6 +6,9 @@
 #include <err.h> 
 #include <stdio.h> 
 #include <stdlib.h> 
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 static void help();
 
@@ -33,7 +36,7 @@ int main(int argc, char *argv[])
 			execvp(argv[0], &argv[0]);
 			err(1, "%s", argv[0]);
 		} else {
-			wait();
+			wait(&c);		/* reuse c */
 			sleep(seconds);
 		}
 	return 0;
